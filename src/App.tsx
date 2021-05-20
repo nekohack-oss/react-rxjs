@@ -1,24 +1,20 @@
-import React from 'react'
-import logo from './assets/logo.svg'
+import React, { useState } from 'react'
+import { useSearch } from './hooks/searchComposable'
+
+import SearchInput from './components/SearchInput'
+import SearchResult from './components/SearchResult'
 
 const App = () => {
+    const [word, setWord] = useState('')
+    const result = useSearch(word)
     return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    Edit <code>src/App.tsx</code> and save to reload.
-                </p>
-                <a
-                    className="App-link"
-                    href="https://reactjs.org"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                >
-                    Learn React
-                </a>
-            </header>
-        </div>
+        <main>
+            <h1>{word ? `Word: ${word}` : 'Word'}</h1>
+            <h2>Search</h2>
+            <SearchInput word={word} changeInput={setWord} />
+            <h2>Result</h2>
+            <SearchResult result={result} />
+        </main>
     )
 }
 
